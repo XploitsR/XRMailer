@@ -21,10 +21,10 @@ This Mailer Combines Both Gmail And Yahoo SMTP Servers.
    2. chmod +x setup.sh && ./setup.sh
 
 ## Gmail Users:
-   :> Go to this link: https://myaccount.google.com/security
-   :> Login to your account if u haven't already
-   :> Scroll down and click on *Turn on access* for Less secure apps access
-   :> On Less secure app access page, Turn ON *Allow less secure apps*
+   1. Go to this link: https://myaccount.google.com/security
+   2. Login to your account if u haven't already
+   3. Scroll down and click on *Turn on access* for Less secure apps access
+   4. On Less secure app access page, Turn ON *Allow less secure apps*
 
 ## Run:
    ./xrmailer
