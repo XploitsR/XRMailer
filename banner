@@ -1,0 +1,15 @@
+#!/bin/bash
+
+##############
+#  BANNER    #
+##############
+
+CMDS=`type -P figlet &>/dev/null && echo 1 || echo 0`
+
+if [ "$CMDS" -eq 1 ]
+then
+figlet -cf slant XPLOITSR
+echo " "
+figlet -cf digital '(~|~)     XRMAILER     (~|~)'	
+echo " "
+fi

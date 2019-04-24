@@ -1,0 +1,118 @@
+#!/bin/bash
+
+######################################################################
+# Copyright (c). All rights reserved                                 #
+# GNU GENERAL PUBLIC LICENSE                                         #
+# Version 3, 29 June 2007                                            #
+#                                                                    #
+# Coded by Solomon Narh (::XploitsR Author::)                        #
+# Github: https://github.com/XploitsR/XRMailer                       #
+# Facebook: https://facebook.com/RXploits                            #
+# Twitter: https://twitter.com/RXploits                              #
+# Telegram: https://t.me/RXploits                                    #
+# Website: https://xploitsr.tk                                       #
+#                                                                    #
+#             ::PERSONAL ME::                                        #
+# Github: https://github.com/XploitsR/XRMailer                       #
+# Facebook: https://facebook.com/solomon.narh.311                    #
+# Twitter: https://twitter.com/solomon97062                          #
+# Instagram: @_xploitsr_author_1                                     #
+# Email: solomonnarh97062@gmail.com                                  #
+######################################################################
+
+path=`pwd`
+xrlog="$path/.xrlog/xrlog"
+
+if [ -f "$xrlog" ]
+then
+
+cyan='\e[0;36m'
+green='\e[0;32m'
+red='\e[1;31m'
+yellow='\e[1;33m'
+whiteBlink='\e[1;5m'
+path=`pwd`
+file="$path/xrmailer.py"
+
+sleep 1
+
+Banner(){
+
+source banner
+
+}
+
+Usage(){
+
+echo " "
+echo "OPTIONS:"
+echo " "
+echo "       -h :: Print this screen"
+echo "       -v :: Print XRMailer Version"
+echo " "
+echo "Usage:"
+echo " "
+echo "     ./xrmailer"
+echo " "
+
+}
+
+Version(){
+
+echo " ::XRMailer::Version:: 1.5"
+
+}
+
+if [ "$1" = "-h" ]
+then
+sleep 2
+
+   Banner
+   Usage
+
+elif [ "$1" = '-v' ]
+then
+sleep 2
+
+   Banner
+echo " "
+   Version
+
+elif [[ -z "$1" ]]
+then
+echo " "
+sleep 3
+
+Banner
+echo " "
+sleep 2
+echo  "[*] ::Compose Mail:: "
+sleep 2
+
+if [ -f "$file" ] 
+then
+
+python3 $file
+
+sleep 3
+
+else
+
+echo -e $red"[!] ::Mailer(file) not found:: "
+sleep 2
+echo -e $red"[!] ::Aborting:: "
+sleep 3
+fi
+
+else
+sleep 2
+
+   Banner
+echo " "
+   Usage
+fi
+else
+echo "[!] Please Run The Setup"
+echo "[*] Type chmod 755 setup.sh && ./setup.sh"
+exit 1
+fi
