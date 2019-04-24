@@ -2,10 +2,10 @@
 XRMailer | XploitsR Authors are in once more! (A Combined Mailer For Sending Emails).
 This Mailer Combines Both Gmail And Yahoo SMTP Servers.
 
-# Screenshot:
+## Screenshot:
    <img src="https://raw.githubusercontent.com/XploitsR/XRMailer/master/sample.png" width="50%">
 
-# Tested On:
+## Tested On:
    * Kali Linux rolling 2018 i686 GNU/Linux
 
 ## Linux operating systems we recommend:
@@ -13,12 +13,18 @@ This Mailer Combines Both Gmail And Yahoo SMTP Servers.
    - Parrot 
    - BackTrack 
 
-# Clone the files:
+## Clone the files:
    * Type this into your terminal: git clone https://github.com/XploitsR/XRMailer.git
 
-# Setup:
+## Setup:
    1. cd XRMailer
    2. chmod +x setup.sh && ./setup.sh
 
-# Run:
+## Gmail Users:
+   :> Go to this link: https://myaccount.google.com/security
+   :> Login to your account if u haven't already
+   :> Scroll down and click on *Turn on access* for Less secure apps access
+   :> On Less secure app access page, Turn ON *Allow less secure apps*
+
+## Run:
    ./xrmailer
