@@ -28,3 +28,7 @@ This Mailer Combines Both Gmail And Yahoo SMTP Servers.
 
 ## Run:
    ./xrmailer
+   
+## To Update:
+   1. chmod +x update
+   2: ./update
