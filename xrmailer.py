@@ -21,7 +21,7 @@
 ######################################################################
 
 
-import sys,csv,os
+import sys,csv
 import smtplib, ssl
 import getpass
 import time
