@@ -15,7 +15,7 @@
 #             ::PERSONAL ME::                                        #
 # Github: https://github.com/XploitsR/XRMailer                       #
 # Facebook: https://facebook.com/solomon.narh.311                    #
-# Twitter: https://twitter.com/solomon97062                          #
+# Twitter: https://twitter.com/Solomon97062                          #
 # Instagram: @_xploitsr_author_1                                     #
 # Email: solomonnarh97062@gmail.com                                  #
 ######################################################################
