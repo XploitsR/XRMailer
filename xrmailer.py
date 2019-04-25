@@ -555,7 +555,7 @@ if len(from_addr.strip()) > 0 and len(password.strip()) > 0 and len(subject.stri
                      )
  
                   print(f"[*] Mail Sent To {email} ")
-                  #server.quit()
+                  
         else:
             msg["To"] = to_addrs.strip()
             if userDocBool is None:
@@ -569,7 +569,6 @@ if len(from_addr.strip()) > 0 and len(password.strip()) > 0 and len(subject.stri
                    msg.as_string(),
                )
             else:
-               #msg["To"] = to_addrs.strip()
                if bBool is not None:
                   temp = bBool() %(cTitl.strip(),cSalu.strip(),r.strip(),cComp.strip(),cAddr.strip().replace(" ","+"),cAddr.strip(),to_addrs.strip())
                Emtype = MIMEText(temp, Emtype)
