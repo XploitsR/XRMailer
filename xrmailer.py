@@ -522,7 +522,7 @@ if len(from_addr.strip()) > 0 and len(password.strip()) > 0 and len(subject.stri
 
    try:
      with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-        #server.login(from_addr, password)
+        server.login(from_addr, password)
 
         if userMassBool is not None:
            with verifyCSVFile as file:
@@ -537,28 +537,22 @@ if len(from_addr.strip()) > 0 and len(password.strip()) > 0 and len(subject.stri
                         temp = bBool() %(cTitl.strip(),cSalu.strip(),r.strip(),cComp.strip(),cAddr.strip().replace(" ","+"),cAddr.strip(),email.strip())
                      Emtype = MIMEText(temp, Emtype)
                      msg.attach(Emtype)
-                     g = open("mailed.html","a")
-                     g.write(from_addr + " " + email.strip() + " " + msg.as_string())
-                     g.close()
-                     """server.sendmail(
+                     server.sendmail(
                          from_addr,
                          email.strip(),
                          msg.as_string(),
-                     )"""
+                     )
                   else:
                      if bBool is not None:
                         temp = bBool() %(cTitl.strip(),cSalu.strip(),r.strip(),cComp.strip(),cAddr.strip().replace(" ","+"),cAddr.strip(),email.strip())
                      Emtype = MIMEText(temp, Emtype)
                      msg.attach(Emtype)
                      msg.attach(doc)
-                     g = open("mailed.html","a")
-                     g.write(from_addr + " " + email.strip() + " " + msg.as_string())
-                     g.close()
-                     """server.sendmail(
+                     server.sendmail(
                          from_addr,
                          email.strip(),
                          msg.as_string(),
-                     )"""
+                     )
  
                   print(f"[*] Mail Sent To {email} ")
                   #server.quit()
@@ -569,14 +563,11 @@ if len(from_addr.strip()) > 0 and len(password.strip()) > 0 and len(subject.stri
                   temp = bBool() %(cTitl.strip(),cSalu.strip(),r.strip(),cComp.strip(),cAddr.strip().replace(" ","+"),cAddr.strip(),to_addrs.strip())
                Emtype = MIMEText(temp, Emtype)
                msg.attach(Emtype)
-               g = open("mailed.html","a")
-               g.write(from_addr + " " + to_addrs.strip() + " " + msg.as_string())
-               g.close()
-               """server.sendmail(
+               server.sendmail(
                    from_addr,
                    to_addrs.strip(),
                    msg.as_string(),
-               )"""
+               )
             else:
                #msg["To"] = to_addrs.strip()
                if bBool is not None:
@@ -584,14 +575,11 @@ if len(from_addr.strip()) > 0 and len(password.strip()) > 0 and len(subject.stri
                Emtype = MIMEText(temp, Emtype)
                msg.attach(Emtype)
                msg.attach(doc)
-               g = open("mailed.html","a")
-               g.write(from_addr + " " + to_addrs.strip() + " " + msg.as_string())
-               g.close()
-               """server.sendmail(
+               server.sendmail(
                    from_addr,
                    to_addrs.strip(),
                    msg.as_string(),
-               )"""
+               )
             print("[*] Mail Sent To " + to_addrs)
             server.quit()
 
