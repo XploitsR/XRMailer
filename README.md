@@ -26,6 +26,11 @@
    3. Scroll down and click on *Turn on access* for Less secure apps access
    4. On Less secure app access page, Turn ON *Allow less secure apps*
 
+## Yahoo Users:
+   1. Go to this link: https://login.yahoo.com/account/security
+   2. Login to your account if u haven't already
+   3. Scroll down and *Turn ON* Allow apps that use less secure sign in
+
 ## Run:
     ./xrmailer
    
