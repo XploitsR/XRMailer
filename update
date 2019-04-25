@@ -1,0 +1,39 @@
+#!/bin/bash
+
+path=`pwd`
+xrlog="$path/.xrlog"
+
+for i in Emails/*
+do
+   if [[ -f "$i" ]]; then
+      mv $i $path >/dev/null 2>&1
+      ema=true
+   fi
+done
+for i in Files/*
+do
+   if [[ -f "$i" ]]; then
+      mv $i $path >/dev/null 2>&1
+      fil=true
+   fi
+done
+for i in Templates/*
+do
+   if [[ -f "$i" ]]; then
+      mv $i $path >/dev/null 2>&1
+      tem=true
+   fi
+done
+sleep 1
+if [ $ema ] && [ $fil ] && [ $tem ] && [ -d "$xrlog" ]; then
+rm -r $xrlog >/dev/null 2>&1
+rm -r Templates/ >/dev/null 2>&1
+rm -r Emails/ >/dev/null 2>&1
+rm -r Files/ >/dev/null 2>&1
+sleep 2
+git reset HEAD --hard
+git pull origin master
+sleep 1
+clear
+chmod +x setup.sh >/dev/null 2>&1 && ./setup.sh
+fi
