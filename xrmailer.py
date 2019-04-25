@@ -161,8 +161,6 @@ elif userType == 3:
 
    print(" ")
    time.sleep(1)
-  
-
 #Document
    print(
 """
@@ -246,21 +244,14 @@ elif userType == 4:
        print("[!] Error:: Space Cant Be Empty");
        print(red + "[!] Aborting...");
        quit()
-
-
 else:
    print(" ")
    print("[!] Error:: Please choose from available list");
    print(red + "[!] Aborting...");
    quit()  
-
 time.sleep(1)
-
-
 if Temp:
-  
   from Templates.templates import *
-  
   #Template
   print(" ")
   print(
@@ -529,8 +520,6 @@ if len(from_addr.strip()) > 0 and len(password.strip()) > 0 and len(subject.stri
                reader = csv.reader(file)
                next(reader)  # Skip header row
                for number,email in reader:
-                  #msg["To"] = email
-                  #msg["Bcc"] = email
                   # Turn these into plain/html MIMEText objects
                   if userDocBool is None:
                      if bBool is not None:
@@ -586,7 +575,6 @@ if len(from_addr.strip()) > 0 and len(password.strip()) > 0 and len(subject.stri
      print(e)
    finally:
        quit()
-
 else:
      print(" ")
      print("[!] Error:: Space(s) Cant Be Empty")
