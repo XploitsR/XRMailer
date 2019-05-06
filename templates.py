@@ -24,17 +24,12 @@
 
 def friendly():
    friendly = """\
-<!doctype html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html">
-</head>
-<body style="background-image: linear-gradient(rgba(77,96,164,.6), rgba(0,0,0,.8)), url('https://cdn.pixabay.com/photo/2019/04/05/17/51/forest-4105676_960_720.jpg');background-size:cover;background-repeat: no-repeat;background-attachment: fixed;margin:0;padding:10px;">
-<div class="container" style="position:relative;margin:auto;border:solid 1px #fff;border-radius:10px;width:500px;font-family:'Amaranth',sans-serif;">
-<div class="header" style="position:relative;text-align:center;padding:20px;color:#fff;border-radius:10px 10px 0 0;background-color:#636a7f;font-weight:bold;font-size:20px;">
+<body style="background-image: linear-gradient(rgba(77,96,224,.6), rgba(0,0,0,.8)), url('https://cdn.pixabay.com/photo/2013/07/18/20/26/boat-164989_960_720.jpg');background-size:cover;background-repeat: no-repeat;background-attachment: fixed;margin:0;padding:10px;">
+<div class="container" style="position:relative;margin:auto;border-radius:10px;width:500px;font-family:'Amaranth',sans-serif;">
+<div class="header" style="position:relative;text-align:center;padding:20px;color:#fff;border-radius:10px 10px 0 0;background-color:#0cbfdc;font-weight:bold;font-size:20px;">
 %s
 </div>
-<div class="content" style="position:relative;padding:10px;font-family:'Amaranth',sans-serif;color:#5d5858;color:#fff;">
+<div class="content" style="position:relative;padding:10px;font-family:'Amaranth',sans-serif;color:#08eae0;border-top:none;border-bottm:none;border-left:solid 1px #0cbfdc;border-right:solid 1px #0cbfdc;">
 <p class="salutation" style="font-weight:bold;font-size:20px;">
 %s
 </p>
@@ -42,34 +37,28 @@ def friendly():
 %s
 </p>
 </div>
-<div class="footer" style="position:relative;text-align:center;padding:20px;color:#fff;border-radius:0 0 10px 10px;background-color:#636a7f;">
+<div class="footer" style="position:relative;text-align:center;padding:20px;color:#fff;border-radius:0 0 10px 10px;background-color:#0cbfdc;">
 <span style="font-size:20px"><b>SOCIAL</b></span><br />
-<span><a style="color:#fff" href="%s">Facebook</a>&nbsp;<a style="color:#fff" href="%s">Twitter</a></span>
+<span><a style="color:#fff" href="%s">facebook</a>&nbsp;<a style="color:#fff" href="%s">twitter</a></span>
 </div>
 </div>
 </body>
-</html>
    """
    return friendly
 
 def business():
    business = """\
-<!doctype html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html">
-</head>
 <body style="background-image: linear-gradient(rgba(77,96,164,.6), rgba(0,0,0,.8)), url('https://cdn.pixabay.com/photo/2019/04/06/15/28/business-4107640_960_720.jpg');background-size:cover;background-repeat: no-repeat;background-attachment: fixed;margin:0;padding:10px;">
 <div class="container" style="position:relative;margin:auto;border:solid 1px #fff;border-radius:10px;width:500px;">
 <div class="header" style="position:relative;text-align:center;padding:20px;color:#423c3c;border-radius:10px 10px 0 0;font-weight:bold;font-size:19px;background-color:#fff;">
-<img src="https://xploitsr.tk/assets/csxp_img/logo/icon.png" width="50px"><br/>
+<img src="https://pixabay.com/apple-touch-icon.png" width="50px"><br/>
 <b>%s</b>
 </div>
-<div class="content" style="position:relative;padding:10px;font-family:'Amaranth',sans-serif;color:#5d5858;color:#fff;">
+<div class="content" style="position:relative;padding:10px;font-family:'Amaranth',sans-serif;color:#0b91e0;">
 <p class="salutation" style="font-weight:bold;font-size:18px;">
 %s
 </p>
-<p class="body" style="font-size:17px;position:relative;">
+<p class="body" style="font-size:17px;position:relative;line-height:1.6em">
 %s
 </p>
 </div>
@@ -77,11 +66,10 @@ def business():
 <p> 
 &copy; %s, <a style="color:dodgerblue" href="https://maps.google.com/?q=%s"> %s </a>
 </p>
-<p>This message was sent to %s and intended for you.</p>
+<p>This message was sent to you and intended for you only.</p>
 </div>
 </div>
 </body>
-</html>
    """
    return business
 
