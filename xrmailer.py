@@ -20,7 +20,6 @@
 # Email: solomonnarh97062@gmail.com                                  #
 ######################################################################
 
-
 import sys,csv
 import smtplib, ssl
 import getpass
@@ -34,57 +33,30 @@ Temp = False
 userMassBool = None
 userDocBool = None
 bBool = None
-red = '\033[91m'
-#text = " "
-#temp = " "
 
-#Email Service Providers
-print(
-"""
-###########################
-# EMAIL SERVICE PROVIDERS #
-###########################
- """
-)
-print(" 1: Gmail\n 2: Yahoo")
-userProv = int(input("[#] Choose: "))
+############################
+# Pre-defined functions!!  #
+############################
 
+#SMTP
+def smtp_portSSL(smtp_server):
+   return [str(smtp_server),int(465)]
+def smtp_portTLS(smtp_server):
+   return [str(smtp_server),int(578)]
 
-#Verify Email Service Providers
-if userProv == 1:
-   smtp_server = "smtp.gmail.com"
-   port = 465
-elif userProv == 2:
-   smtp_server = "smtp.mail.yahoo.com"
-   port = 465
-else:
-   print(" ")
-   print("[!] Error:: Please choose from available list");
-   print(red + "[!] Aborting...");
-   quit()  
+#Temps && files
+def Tempt():
+    return "Templates/"
+def Email():
+    return "Emails/"
+def File():
+    return "Files/"
+def Templates():
+    from Templates.templates import friendly,business,customHtml,customText
+    return [friendly(),business(),customHtml(),customText()]
 
-print(" ")
-time.sleep(1)
-
-#Email type
-print(
-"""
-#################
-# TYPE OF EMAIL #
-#################
- """
-)
-print(" 1: PlainText\n 2: HTML\n 3: PlainText With Attachment\n 4: HTML With Attachment")
-userType = int(input("[#] Choose: "))
-#userType.strip()
-
-#Verify Email Type
-if userType == 1:
-   from Templates.templates import customText
-   Emtype = "plain"
-   userDocBool = None
-
-   print(
+def print_customText():
+    print(
 """
 #############################
 # ::CUSTOM TEXT::           #
@@ -95,250 +67,10 @@ if userType == 1:
 # Example: sample.txt       #
 #############################
  """
-          )
-   try:
+         )
 
-     cText = str(input("[#] File (eg: sample.txt): "))
-     if len(cText.strip()) > 0:
-        verifyTEXTFile = open("Templates/" + cText.strip())
-        if verifyTEXTFile is not None:
-           with verifyTEXTFile as f:
-                r = f.read()
-                temp = customText() %(r.strip())
-                f.close()
-      
-     else:
-       print(" ")
-       print("[!] Error:: Please Specify A .txt File")
-       print(red + "[!] Aborting...");
-       
-   except FileNotFoundError as e:
-      print("[!] File Not Found")
-   
-elif userType == 2:
-   Emtype = "html"
-   Temp = True
-   userDocBool = None
-
-elif userType == 3:
-   from Templates.templates import customText
-   Emtype = "plain"
-
-   print(
-"""
-#############################
-# ::CUSTOM TEXT::           #
-# Put your Custom Text      #
-# Into The Templates Folder #
-# And Specify The Name Here #
-# Save It As .txt           #
-# Example: sample.txt       #
-#############################
- """
-          )
-   try:
-
-     cText = str(input("[#] File (eg: sample.txt): "))
-     if len(cText.strip()) > 0:
-        verifyTEXTFile = open("Templates/" + cText.strip())
-        if verifyTEXTFile is not None:
-           with verifyTEXTFile as f:
-                r = f.read()
-                temp = customText() %(r.strip())
-                f.close()
-        else:
-           print(" ")
-           print("[!] Error:: Please Specify A .txt File")
-           print(red + "[!] Aborting...");
-           quit()
-     else:
-        print(" ")
-        print("[!] Error:: Space Cant Be Empty");
-        print(red + "[!] Aborting...");
-        quit()
-   except FileNotFoundError as e:
-     print("[!] File Not Found")
-
-   print(" ")
-   time.sleep(1)
-#Document
-   print(
-"""
-#############################
-# ::Specify The FILE::      #
-# Put your File             #
-# Into The Files Folder     #
-# And Specify The Name Here #
-# Example: sample.png       #
-#############################
- """
-   )
-   userDoc = str(input("[#] File(eg: sample.png): "))
-   if len(userDoc.strip()) > 0:
-      verifyDOCFile = open("Files/" + userDoc.strip(),"rb")
-      if verifyDOCFile is not None:
-         with verifyDOCFile as attachment:
-              #Add file as application/octet-stream
-              #The Email Client can download this attachment
-              userDocBool = True
-              doc = MIMEBase("application","octet-stream")
-              doc.set_payload(attachment.read())
-              encoders.encode_base64(doc)
-              doc.add_header(
-                "Content-Disposition",
-                f"attachment; filename= {userDoc}",
-              )
-      else:
-           print(" ")
-           print("[!] Error:: Please Specify A File")
-           print(red + "[!] Aborting...");
-           quit()
-         
-   else:
-       print(" ")
-       print("[!] Error:: Space Cant Be Empty");
-       print(red + "[!] Aborting...");
-       quit()     
-
-elif userType == 4:
-   Emtype = "html"
-   Temp = True
-   
-   #Document
-   print(
-"""
-#############################
-# YOUR FILE                 #
-# Put your File             #
-# Into The Files Folder     #
-# And Specify The Name Here #
-# Example: sample.png       #
-#############################
- """
-   )
-   userDoc = str(input("[#] File(eg: sample.png): "))
-   if len(userDoc.strip()) > 0:
-      verifyDOCFile = open("Files/" + userDoc.strip(),"rb")
-      if verifyDOCFile is not None:
-         with verifyDOCFile as attachment:
-              #Add file as application/octet-stream
-              #The Email Client can download this attachment
-              userDocBool = True
-              doc = MIMEBase("application","octet-stream")
-              doc.set_payload(attachment.read())
-              encoders.encode_base64(doc)
-              doc.add_header(
-                "Content-Disposition",
-                f"attachment; filename= {userDoc}",
-              )
-      else:
-           userDocBool = None
-           print(" ")
-           print("[!] Error:: Please Specify A File")
-           print(red + "[!] Aborting...");
-           quit()
-         
-   else:
-       userDocBool = None
-       print(" ")
-       print("[!] Error:: Space Cant Be Empty");
-       print(red + "[!] Aborting...");
-       quit()
-else:
-   print(" ")
-   print("[!] Error:: Please choose from available list");
-   print(red + "[!] Aborting...");
-   quit()  
-time.sleep(1)
-if Temp:
-  from Templates.templates import *
-  #Template
-  print(" ")
-  print(
-"""
-###################
-# CHOOSE TEMPLATE #
-###################
- """
-  )
-  print(" 1: Friendly\n 2: Business\n 3: Custom ")
-  userTemp = int(input("[#] Choose: "))
-
-  #Verify Template
-  if userTemp == 1:
-     print(
-"""
-#############################
-# ::LETS EDIT THE FILE::    #
-#        HEADER             #
-#   Title,Content..etc      #
-#############################
- """
-          )
-     cTitl = str(input("[#] Your Title (eg: Love Letter): "))
-     cSalu = str(input("[#] Your Salutation (eg: Hi Sarah,): "))
-     time.sleep(1)
-     print(
-"""
-#############################
-# ::CUSTOM TEXT::           #
-# Put your Custom Text      #
-# Into The Templates Folder #
-# And Specify The Name Here #
-# Save It As .txt           #
-# Example: sample.txt       #
-#############################
- """
-          )
-     cBody = str(input("[#] Your Message(File) (eg: sample.txt): "))
-     time.sleep(1)
-     print(
-"""
-#############################
-# ::LETS EDIT THE FILE::    #
-#        FOOTER             #
-#   How one gets in touch   #
-#        with you.          #
-#############################
- """
-          )
-     cFb = str(input("[#] Facebook Link (eg: https://facebook.com/you): "))
-     cTw = str(input("[#] Twitter Link (eg: https://twitter.com/you): "))
-     
-     if len(cTitl.strip()) > 0 and len(cSalu.strip()) > 0 and len(cBody.strip()) > 0 and len(cFb.strip()) > 0 and len(cTw.strip()) > 0:
-        verifyCBodyFile = open("Templates/" + cBody.strip())
-        if verifyCBodyFile is not None:
-           with verifyCBodyFile as f:
-               r = f.read()
-               temp = friendly() %(cTitl.strip(),cSalu.strip(),r.strip(),cFb.strip(),cTw.strip())
-               f.close()
-        else:
-           print(" ")
-           print("[!] Error:: Please Specify your custom message File(.txt)")
-           print(red + "[!] Aborting...");
-           quit()
-
-     else:
-        print(" ")
-        print("[!] Please Specify fill blank spaces")
-        print(red + "[!] Aborting...");
-        quit()
-
-  elif userTemp == 2:
-     print(
-"""
-#############################
-# ::LETS EDIT THE FILE::    #
-#        HEADER             #
-#   Title,Content..etc      #
-#############################
- """
-          )
-     cTitl = str(input("[#] Your Title (eg: Webinar): "))
-     cSalu = str(input("[#] Your Salutation (eg: Dear members,): "))
-     time.sleep(1)
-     print(
-"""
+def print_customTextHtml():
+    n = """
 ################################
 # ::CUSTOM TEXT::              #
 # Put your Custom Text         #
@@ -351,32 +83,7 @@ if Temp:
 # <img><p><span> and many more #
 ################################
  """
-          )
-     cBody = str(input("[#] Your Message(File) (eg: sample.txt): "))
-     cComp = str(input("[#] Companies Name (eg: Facebook inc): "))
-     cAddr = str(input("[#] Companies Address (eg: 1601 Willow Road): "))
-     time.sleep(1)
-     if len(cTitl.strip()) > 0 and len(cSalu.strip()) > 0 and len(cBody.strip()) > 0 and len(cComp.strip()) > 0 and len(cAddr.strip()) > 0:
-        verifyCBodyFile = open("Templates/" + cBody.strip())
-        if verifyCBodyFile is not None:
-           with verifyCBodyFile as f:
-               r = f.read()
-               bBool = business
-               f.close()
-        else:
-           print(" ")
-           print("[!] Error:: Please Specify your custom message File(.txt)")
-           print(red + "[!] Aborting...");
-           quit()
-
-     else:
-        print(" ")
-        print("[!] Please Specify fill blank spaces")
-        print(red + "[!] Aborting...");
-        quit()
-  elif userTemp == 3:
-     print(
-"""
+    b = """
 #############################
 # ::CUSTOM HTML TEMPLATE::  #
 # Put your Custom Template  #
@@ -385,49 +92,266 @@ if Temp:
 # Example: sample.html      #
 #############################
  """
+    return [n,b]
+
+def print_docText():
+    print(
+"""
+###############################
+# ::Specify your attachment:: #
+# put your file               #
+# into the files folder       #
+# and specify the name here   #
+# example: sample.png         #
+###############################
+ """
+   )
+
+def accept_file(fileDir,filetype,readType,fileExt):
+
+   try:
+
+      cText = str(input(f"[#] File (eg: {filetype}): "))
+      if len(cText.strip()) > 0:
+         verifyTEXTFile = open(fileDir + cText.strip(),f"{readType}")
+         if verifyTEXTFile is not None:
+            with verifyTEXTFile as f:
+                 r = f.read()
+                 temp = Templates()[3] %(r.strip())
+                 f.close()
+      
+      else:
+        print(f"[!] Don't be silly!, please specify a {fileExt} file")
+        quit()
+
+   except FileNotFoundError:
+      print("[!] Don't be silly!, file not found")
+      quit()
+   return temp
+
+def accept_docfile(filetype,readType):
+   #Accept Attachment
+   try:
+      global userDocBool,doc;
+      userDoc = str(input(f"[#] File(eg: {filetype}): "))
+      if len(userDoc.strip()) > 0:
+         verifyDOCFile = open(File() + userDoc.strip(),f"{readType}")
+         if verifyDOCFile is not None:
+            with verifyDOCFile as attachment:
+                 #Add file as application/octet-stream
+                 #The Email Client can download this attachment
+                 userDocBool = True
+                 doc = MIMEBase("application","octet-stream")
+                 doc.set_payload(attachment.read())
+                 encoders.encode_base64(doc)
+                 doc.add_header(
+                   "Content-Disposition",
+                   f"attachment; filename={userDoc}",
+                 )
+      else:
+        print("[!] Don't be silly!, please specify an attachment")
+        quit()
+
+   except FileNotFoundError:
+      print("[!] Don't be silly!, file not found")
+      quit()
+  
+def print_friendlyHdtext():
+   print(
+"""
+#############################
+# ::LETS EDIT THE FILE::    #
+#        HEADER             #
+#   Title,Content..etc      #
+#############################
+"""
           )
-     cTemp = str(input("[#] File (eg: sample.html): "))
-     if len(cTemp.strip()) > 0:
-        verifyHTMLFile = open("Templates/" + cTemp.strip())
-        if verifyHTMLFile is not None:
-           with verifyHTMLFile as f:
-               r = f.read()
-               temp = customHtml() %(r.strip())
-               f.close()
-        else:
-           print(" ")
-           print("[!] Error:: Please Specify A .html File")
-           print(red + "[!] Aborting...");
-           quit()
-     else:
-        print(" ")
-        print("[!] Error:: Space Cant Be Empty");
-        print(red + "[!] Aborting...");
-        quit()  
-  else:
-     print("[!] Error:: Please choose from available list");
-     print(red + "[!] Aborting...");
-     quit()  
+
+def accept_friendlyFunc(t,s,m,f,tw,num):
+
+  try:
+     cTitl = str(input(f"[#] Your Title (eg: {t}): "))
+     cSalu = str(input(f"[#] Your Salutation (eg: {s}): "))
+     time.sleep(1)
+     print(print_customTextHtml()[0])
+     cBody = str(input(f"[#] Your Message(File) (eg: {m}): "))
+     time.sleep(1)
+     print(
+"""
+#############################
+# ::LETS EDIT THE FILE::    #
+#        FOOTER             #
+#   How one gets in touch   #
+#        with you.          #
+#############################
+"""
+          )
+     cFb = str(input(f"{f}"))
+     cTw = str(input(f"{tw}"))
+     
+     try:
+      if len(cTitl.strip()) > 0 and len(cSalu.strip()) > 0 and len(cBody.strip()) > 0 and len(cFb.strip()) > 0 and len(cTw.strip()) > 0:
+         verifyCBodyFile = open(Tempt() + cBody.strip())
+         if verifyCBodyFile is not None:
+            with verifyCBodyFile as f:
+                r = f.read()
+                if num == 0:
+                   temp = Templates()[num] %(cTitl.strip(),cSalu.strip(),r.strip(),cFb.strip(),cTw.strip())
+                elif num == 1:
+                   temp = Templates()[num] %(cTitl.strip(),cSalu.strip(),r.strip(),cFb.strip(),cTw.strip().replace(" ","+"),cTw.strip())
+                f.close()
+         else:
+            print("[!] Don't be silly!, please specify your custom message file(.txt)")
+            quit()
+     except FileNotFoundError:
+      print("[!] Don't be silly!, file not found")
+      quit()
+
+  except ValueError:
+     print("[!] Don't be silly!, Unknown value")
+     quit()
+  return temp
+
+######################
+####### End ##########
+######################
+
+#this extends smtp_*()
+print(
+"""
+###########################
+# EMAIL SERVICE PROVIDERS #
+###########################
+"""
+)
+
+try:
+   print(" 1: Gmail\n 2: Yahoo")
+   userProv = int(input("[#] Choose: "))
+   #Verify Email Service Providers
+   if userProv == 1:
+     smtp_S = smtp_portSSL("smtp.gmail.com")[0]
+     smtp_P = smtp_portSSL(None)[1]
+   elif userProv == 2:
+     smtp_S = smtp_portSSL("smtp.mail.yahoo.com")[0]
+     smtp_P = smtp_portTLS(None)[0]
+   else:
+     print("[!] Don't be silly!, choose from above list");
+     quit()
+
+except ValueError:
+   print("[!] Don't be silly!, Unknown value")
+   quit()
+
+print(" ")
+time.sleep(1)
+
+#Email type
+print(
+"""
+#################
+# TYPE OF EMAIL #
+#################
+"""
+)
+
+try:
+   from Templates.templates import customText
+   print(" 1: PlainText\n 2: HTML\n 3: PlainText With Attachment\n 4: HTML With Attachment")
+   userType = int(input("[#] Choose: "))
+
+   #Verify Email Type
+   if userType == 1:
+     Emtype = "plain"
+     userDocBool = None
+     print_customText()
+     temp = accept_file(Tempt(),"sample.txt","r",".txt")
+
+   elif userType == 2:
+     Emtype = "html"
+     Temp = True
+     userDocBool = None
+
+   elif userType == 3:
+     Emtype = "plain"
+     print_customText()
+     temp = accept_file(Tempt(),"sample.txt","r",".txt")
+     print(" ")
+     time.sleep(1)
+     print_docText()
+     accept_docfile("sample.pdf","rb")
+
+   elif userType == 4:
+     Emtype = "html"
+     Temp = True
+     print_docText()
+     accept_docfile("sample.pdf","rb")
+
+   else:
+     print("[!] Don't be silly!, choose from above list");
+     quit()
+
+except ValueError:
+   print("[!] Don't be silly!, Unknown value")
+   quit()
+
+print(" ")
+time.sleep(1)
+
+try:
+
+ if Temp:
+    print(
+"""
+###################
+# CHOOSE TEMPLATE #
+###################
+"""
+   )
+    print(" 1: Friendly\n 2: Business\n 3: Custom ")
+    userTemp = int(input("[#] Choose: "))
+
+    if userTemp == 1:
+       print_friendlyHdtext()
+       fb = "[#] Facebook Link (eg: https://facebook.com/you): "
+       tw = "[#] Twitter Link (eg: https://twitter.com/you): "
+       temp = accept_friendlyFunc("Love letter","Hi Sarah","sample.txt",fb,tw,0)
+ 
+    elif userTemp == 2:
+       print_friendlyHdtext()
+       fb = "[#] Companies Name (eg: Facebook inc): "
+       tw = "[#] Companies Address (eg: 1601 Willow Road): "
+       bTemp = accept_friendlyFunc("Webinar","Dear members,","sample.txt",fb,tw,1)
+       bBool = True
+
+    elif userTemp == 3:
+       print(print_customTextHtml()[1])
+       temp = accept_file(Tempt(),"sample.html","r",".html")
+    else:
+     print("[!] Don't be silly!, choose from above list");
+     quit()
+
+except ValueError:
+   print("[!] Don't be silly!, Unknown value")
+   quit()
 
 time.sleep(1)
-print(" ")
 
-print(
+try:
+  print(
 """
 #######################
 # TO MULTIPLE USERS ? #
 #######################
  """
-)
-print(" 1: Yes\n 2: No")
-userMass = int(input("[#] Choose: "))
+  )
+  print(" 1: Yes\n 2: No")
+  userMass = int(input("[#] Choose: "))
+  time.sleep(1)
+  print(" ")
 
-time.sleep(1)
-print(" ")
-
-if userMass == 1:
-   
-   print(
+  if userMass == 1:
+     print(
 """
 #############################
 # Put A File In Emails      #
@@ -453,30 +377,31 @@ if userMass == 1:
 # 3,xyz@mailServer.net      #
 #############################
  """
-       )
+         )
 
-   userMassFile = str(input("[#] File(eg: sample.csv): "))
-   if len(userMassFile.strip()) > 0:
-      verifyCSVFile = open("Emails/" + userMassFile.strip())
-      if verifyCSVFile is not None:
-         userMassBool = True
-      else:
-         userMassBool = None
-         print(" ")
-         print("[!] Error:: Please Specify A .csv File")
-         print(red + "[!] Aborting...")
-         quit()
-elif userMass == 2:
-   userMassBool == None
+     try:
+       userMassFile = str(input("[#] File(eg: sample.csv): "))
+       if len(userMassFile.strip()) > 0:
+          verifyCSVFile = open(Email() + userMassFile.strip())
+          if verifyCSVFile is not None:
+             userMassBool = True
 
-else:
-   print(" ")
-   print("[!] Error:: Please choose from available list")
-   print(red + "[!] Aborting...")
-   quit()  
-   
+       else:
+          print("[!] Don't be silly!, please specify your .csv file")
+          quit()
+
+     except FileNotFoundError:
+       print("[!] Don't be silly!, file not found")
+       quit()
+
+  elif userMass == 2:
+   userMassBool = None
+
+except ValueError:
+   print("[!] Don't be silly!, Unknown value")
+   quit()
+
 time.sleep(1)
-
 
 print(
 """
@@ -492,17 +417,13 @@ password = getpass.getpass("[*] Senders password: ")
 from_name = str(input("[*] Senders name: "))
 if userMassBool is None:
    to_addrs = str(input("[*] Recipients email: "))
-   if len(to_addrs) < 0:
-      print(" ")
-      print("[!] Error:: Please Specify A Recipient")
-      print(red + "[!] Aborting...")
-      quit()  
 subject =  str(input("[*] Subject: "))
 
 #Multipart Email Module :: Multipart("alternate")
 msg = MIMEMultipart()
 msg["Subject"] = subject
-msg["From"] = from_name
+#Bug in Gmail is ;)
+msg["From"] = from_name + " ;)"
 
 if len(from_addr.strip()) > 0 and len(password.strip()) > 0 and len(subject.strip()) > 0:
 
@@ -510,73 +431,70 @@ if len(from_addr.strip()) > 0 and len(password.strip()) > 0 and len(subject.stri
    
    #create a secure SSL context 
    context = ssl.create_default_context()
-
    try:
-     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+     with smtplib.SMTP_SSL(smtp_S, smtp_P, context=context) as server:
         server.login(from_addr, password)
-
-        if userMassBool is not None:
+        if userMassBool is not None and userDocBool is None:
            with verifyCSVFile as file:
-               reader = csv.reader(file)
-               next(reader)  # Skip header row
-               for number,email in reader:
-                  # Turn these into plain/html MIMEText objects
-                  if userDocBool is None:
-                     if bBool is not None:
-                        temp = bBool() %(cTitl.strip(),cSalu.strip(),r.strip(),cComp.strip(),cAddr.strip().replace(" ","+"),cAddr.strip(),email.strip())
-                     Emtype = MIMEText(temp, Emtype)
-                     msg.attach(Emtype)
-                     server.sendmail(
-                         from_addr,
-                         email.strip(),
-                         msg.as_string(),
-                     )
-                  else:
-                     if bBool is not None:
-                        temp = bBool() %(cTitl.strip(),cSalu.strip(),r.strip(),cComp.strip(),cAddr.strip().replace(" ","+"),cAddr.strip(),email.strip())
-                     Emtype = MIMEText(temp, Emtype)
-                     msg.attach(Emtype)
-                     msg.attach(doc)
-                     server.sendmail(
-                         from_addr,
-                         email.strip(),
-                         msg.as_string(),
-                     )
- 
-                  print(f"[*] Mail Sent To {email} ")
-                  
-        else:
-            msg["To"] = to_addrs.strip()
-            if userDocBool is None:
-               if bBool is not None:
-                  temp = bBool() %(cTitl.strip(),cSalu.strip(),r.strip(),cComp.strip(),cAddr.strip().replace(" ","+"),cAddr.strip(),to_addrs.strip())
-               Emtype = MIMEText(temp, Emtype)
-               msg.attach(Emtype)
-               server.sendmail(
-                   from_addr,
-                   to_addrs.strip(),
-                   msg.as_string(),
-               )
-            else:
-               if bBool is not None:
-                  temp = bBool() %(cTitl.strip(),cSalu.strip(),r.strip(),cComp.strip(),cAddr.strip().replace(" ","+"),cAddr.strip(),to_addrs.strip())
-               Emtype = MIMEText(temp, Emtype)
-               msg.attach(Emtype)
-               msg.attach(doc)
-               server.sendmail(
-                   from_addr,
-                   to_addrs.strip(),
-                   msg.as_string(),
-               )
-            print("[*] Mail Sent To " + to_addrs)
-            server.quit()
-
+                reader = csv.reader(file)
+                next(reader)  # Skip header row
+                if bBool is not None:
+                   temp = bTemp
+                # Turn these into plain/html MIMEText objects
+                Emtype = MIMEText(temp, Emtype)
+                msg.attach(Emtype)
+                for number,email in reader:
+                    server.sendmail(
+                        from_addr,
+                        email.strip(),
+                        msg.as_string(),
+                    )
+                    print(f"[*] Mail Sent To {email}")
+        elif userMassBool is not None and userDocBool is not None:
+           with verifyCSVFile as file:
+                reader = csv.reader(file)
+                next(reader)  # Skip header row
+                if bBool is not None:
+                   temp = bTemp
+                # Turn these into plain/html MIMEText objects
+                Emtype = MIMEText(temp, Emtype)
+                msg.attach(Emtype)
+                msg.attach(doc)
+                for number,email in reader:
+                    server.sendmail(
+                        from_addr,
+                        email.strip(),
+                        msg.as_string(),
+                    )
+                    print(f"[*] Mail Sent To {email}")
+        elif userMassBool is None and userDocBool is None:  
+           msg["To"] = to_addrs.strip()
+           if bBool is not None:
+              temp = bTemp
+           Emtype = MIMEText(temp, Emtype)
+           msg.attach(Emtype)
+           server.sendmail(
+               from_addr,
+               to_addrs.strip(),
+               msg.as_string(),
+           )
+           print("[*] Mail Sent To " + to_addrs)
+        elif userMassBool is None and userDocBool is not None:
+           if bBool is not None:
+              temp = bTemp
+           Emtype = MIMEText(temp, Emtype)
+           msg.attach(Emtype)
+           msg.attach(doc)
+           server.sendmail(
+               from_addr,
+               to_addrs.strip(),
+               msg.as_string(),
+           )
+           print("[*] Mail Sent To " + to_addrs)
+           server.quit()
    except Exception as e:
      print(e)
-   finally:
-       quit()
-else:
-     print(" ")
-     print("[!] Error:: Space(s) Cant Be Empty")
-     print(red + "[!] Aborting...\n")
      quit()
+else:
+   print("[!] Don't be silly!, spaces cant be empty")
+   quit()
