@@ -3,33 +3,40 @@
 path=`pwd`
 xrlog="$path/.xrlog"
 
-for i in Emails/*
+for i in emails/*
 do
    if [[ -f "$i" ]]; then
       mv $i $path >/dev/null 2>&1
       ema=true
    fi
 done
-for i in Files/*
+for i in files/*
 do
    if [[ -f "$i" ]]; then
       mv $i $path >/dev/null 2>&1
       fil=true
    fi
 done
-for i in Templates/*
+for i in templates/*
 do
    if [[ -f "$i" ]]; then
       mv $i $path >/dev/null 2>&1
       tem=true
    fi
 done
+for i in modules/*
+do
+   if [[ -f "$i" ]]; then
+      mv $i $path >/dev/null 2>&1
+      mdl=true
+done
 sleep 1
-if [ $ema ] && [ $fil ] && [ $tem ] && [ -d "$xrlog" ]; then
+if [ $ema ] && [ $fil ] && [ $tem ] && [ $mdl ] && [ -d "$xrlog" ]; then
 rm -r $xrlog >/dev/null 2>&1
-rm -r Templates/ >/dev/null 2>&1
-rm -r Emails/ >/dev/null 2>&1
-rm -r Files/ >/dev/null 2>&1
+rm -r templates/ >/dev/null 2>&1
+rm -r emails/ >/dev/null 2>&1
+rm -r files/ >/dev/null 2>&1
+rm -r modules/ >/dev/null 2>&1
 sleep 2
 git reset HEAD --hard
 git pull origin master
