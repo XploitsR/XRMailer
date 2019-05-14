@@ -29,6 +29,7 @@ do
    if [[ -f "$i" ]]; then
       mv $i $path >/dev/null 2>&1
       mdl=true
+   fi
 done
 sleep 1
 if [ $ema ] && [ $fil ] && [ $tem ] && [ $mdl ] && [ -d "$xrlog" ]; then
