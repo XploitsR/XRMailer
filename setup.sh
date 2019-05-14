@@ -13,7 +13,7 @@
 # Website: https://xploitsr.tk                                       #
 #                                                                    #
 #             ::PERSONAL ME::                                        #
-# Github: https://github.com/XploitsR/XRMailer                       #
+# Github: https://github.com/XploitsR/Solomon97062                   #
 # Facebook: https://facebook.com/solomon.narh.311                    #
 # Twitter: https://twitter.com/solomon97062                          #
 # Instagram: @_xploitsr_author_1                                     #
@@ -31,6 +31,7 @@ xtm=`type -P xterm &>/dev/null && echo 1 || echo 0`
 xrsh="$path/xrmailer"
 xrbn="$path/banner"
 xrpy="$path/xrmailer.py"
+xrsmtp="$path/xrsmtp.py"
 xrtp="$path/templates.py"
 xrhtml="$path/sample.html"
 xrtxt="$path/sample.txt"
@@ -66,10 +67,11 @@ echo "[!] Something went wrong!..."
 sleep 1
 echo "[!] Please Run The Setup Again..."
 sleep 1
+exit 1
 else
 echo "[*] Installations Done!!!"
 #verifying for necessary files
-if [ ! -f "$xrsh" ] && [ ! -f "$xrpy" ] && [ ! -f "$xrbn" ] && [ ! -f "$xrtp" ] && [ ! -f "$xrhtml" ] && [ ! -f "$xrtxt" ] && [ ! -f "$xrem" ] && [ ! -f "$xrpng" ]
+if [ ! -f "$xrsh" ] && [ ! -f "$xrpy" ] && [ ! -f "$xrsmtp" ] && [ ! -f "$xrbn" ] && [ ! -f "$xrtp" ] && [ ! -f "$xrhtml" ] && [ ! -f "$xrtxt" ] && [ ! -f "$xrem" ] && [ ! -f "$xrpng" ]
 then
 echo "[!] Some (files) are missing..."
 echo "[!] Please re-clone XRMailer..."
@@ -81,22 +83,24 @@ chmod +x $xrpy >/dev/null 2>&1
 chmod +x $xrbn >/dev/null 2>&1
 sleep 1
 #Checking for directories
-if [ ! -d "Emails" ] && [ ! -d "Files" ] && [ ! -d "Templates" ]
+if [ ! -d "emails" ] && [ ! -d "files" ] && [ ! -d "templates" ]
 then 
 sleep 1
 #Create Needed Directories
-mkdir Emails >/dev/null 2>&1
-mkdir Files >/dev/null 2>&1
-mkdir Templates >/dev/null 2>&1
+mkdir emails >/dev/null 2>&1
+mkdir files >/dev/null 2>&1
+mkdir templates >/dev/null 2>&1
+mkdir modules >/dev/null 2>&1
 mkdir .xrlog >/dev/null 2>&1
 touch xrlog >/dev/null 2>&1
 echo "Setup Done" > xrlog
 # (mv) files to needed directories
-mv templates.py Templates/ >/dev/null 2>&1
-mv sample.html Templates/ >/dev/null 2>&1
-mv sample.txt Templates/ >/dev/null 2>&1
-mv sample.csv Emails/ >/dev/null 2>&1
-mv sample.png Files/ >/dev/null 2>&1
+mv templates.py templates/ >/dev/null 2>&1
+mv sample.html templates/ >/dev/null 2>&1
+mv sample.txt templates/ >/dev/null 2>&1
+mv sample.csv emails/ >/dev/null 2>&1
+mv sample.png files/ >/dev/null 2>&1
+mv xrsmtp.py modules/ >/dev/null 2>&1
 mv xrlog .xrlog/ >/dev/null 2>&1
 proceed=true
 fi
@@ -104,15 +108,17 @@ if [ "$proceed" ]
 then
 sleep 1
 echo "[*] Setup Done (^_^) ";
-echo "[*] Type ./xrmailer to get started (^_^) ";
+echo "[*] Type ./xrmailer to get started (^_^) "
 echo " "
 sleep 1
+exit 1
 fi
 fi
 fi
 else
 echo " "
 echo "[*] Setup Already Done"
-echo "[*] Type ./xrmailer to get started (^_^) ";
+echo "[*] Type ./xrmailer to get started (^_^) "
 echo " "
+exit 1
 fi
