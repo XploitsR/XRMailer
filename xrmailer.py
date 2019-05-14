@@ -38,21 +38,15 @@ bBool = None
 # Pre-defined functions!!  #
 ############################
 
-#SMTP
-def smtp_portSSL(smtp_server):
-   return [str(smtp_server),int(465)]
-def smtp_portTLS(smtp_server):
-   return [str(smtp_server),int(578)]
-
 #Temps && files
 def Tempt():
-    return "Templates/"
+    return "templates/"
 def Email():
-    return "Emails/"
+    return "emails/"
 def File():
-    return "Files/"
+    return "files/"
 def Templates():
-    from Templates.templates import friendly,business,customHtml,customText
+    from templates.templates import friendly,business,customHtml,customText
     return [friendly(),business(),customHtml(),customText()]
 
 def print_customText():
@@ -226,15 +220,17 @@ print(
 )
 
 try:
+   from modules.xrsmtp import XRSmtp
+   xr = XRSmtp()
    print(" 1: Gmail\n 2: Yahoo")
    userProv = int(input("[#] Choose: "))
    #Verify Email Service Providers
    if userProv == 1:
-     smtp_S = smtp_portSSL("smtp.gmail.com")[0]
-     smtp_P = smtp_portSSL(None)[1]
+     smtp_S = xr.smtp_portSSL("Gmail")[0]
+     smtp_P = xr.smtp_portSSL("Gmail")[1]
    elif userProv == 2:
-     smtp_S = smtp_portSSL("smtp.mail.yahoo.com")[0]
-     smtp_P = smtp_portTLS(None)[0]
+     smtp_S = xr.smtp_portSSL("Yahoo")[0]
+     smtp_P = xr.smtp_portSSL("Yahoo")[1]
    else:
      print("[!] Don't be silly!, choose from above list");
      quit()
@@ -256,7 +252,7 @@ print(
 )
 
 try:
-   from Templates.templates import customText
+   from templates.templates import customText
    print(" 1: PlainText\n 2: HTML\n 3: PlainText With Attachment\n 4: HTML With Attachment")
    userType = int(input("[#] Choose: "))
 
