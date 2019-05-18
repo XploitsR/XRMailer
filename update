@@ -24,20 +24,12 @@ do
       tem=true
    fi
 done
-for i in modules/*
-do
-   if [[ -f "$i" ]]; then
-      mv $i $path >/dev/null 2>&1
-      mdl=true
-   fi
-done
 sleep 1
-if [ $ema ] && [ $fil ] && [ $tem ] && [ $mdl ] && [ -d "$xrlog" ]; then
+if [ $ema ] && [ $fil ] && [ $tem ] && [ -d "$xrlog" ]; then
 rm -r $xrlog >/dev/null 2>&1
 rm -r templates/ >/dev/null 2>&1
 rm -r emails/ >/dev/null 2>&1
 rm -r files/ >/dev/null 2>&1
-rm -r modules/ >/dev/null 2>&1
 sleep 2
 git reset HEAD --hard
 git pull origin master
