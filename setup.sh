@@ -28,10 +28,10 @@ path=`pwd`
 pyDir=`type -P python3 &>/dev/null && echo 1 || echo 0`
 pyfig=`type -P figlet &>/dev/null && echo 1 || echo 0`
 xtm=`type -P xterm &>/dev/null && echo 1 || echo 0`
+pi3=`type -P pip3 &>/dev/null && echo 1 || echo 0`
 xrsh="$path/xrmailer"
 xrbn="$path/banner"
 xrpy="$path/xrmailer.py"
-xrsmtp="$path/xrsmtp.py"
 xrtp="$path/templates.py"
 xrhtml="$path/sample.html"
 xrtxt="$path/sample.txt"
@@ -43,16 +43,16 @@ echo " "
 echo "[*] Setting Up...Please Wait! "
 sleep 5
 #verify commands exist
-if [ "$pyDir" -eq 0 ] || [ "$pyfig" -eq 0 ] || [ "$xtm" -eq 0 ]
+if [ "$pyDir" -eq 0 ] || [ "$pyfig" -eq 0 ] || [ "$xtm" -eq 0 ] || [ "$pi3" -eq 0 ]
 then	
-echo "[!] Some Commands Are Missing!"
+echo "[!] Some commands are missing!"
 sleep 1
 echo "[+] Installing...."
 sleep 1
 #Install needed files
-sudo apt-get update && apt-get install xterm -y && clear
-if [ "$xtm" -eq 1 ]; then
-xterm -T "* Installing python3 and python3-pyfiglet *" -geometry 100x30 -e "sudo apt-get install python3 python3-pyfiglet"
+sudo apt-get update && apt-get install python3 python3-pip xterm -y && clear
+if [ "$xtm" -eq 1 ] && [ "$pi3" -eq 1 ]; then
+xterm -T "* Installing python3 and python3-pyfiglet *" -geometry 100x30 -e "sudo apt-get install python3-pyfiglet && pip3 install xrsmtp"
 start=true
 fi
 else
@@ -71,7 +71,7 @@ exit 1
 else
 echo "[*] Installations Done!!!"
 #verifying for necessary files
-if [ ! -f "$xrsh" ] && [ ! -f "$xrpy" ] && [ ! -f "$xrsmtp" ] && [ ! -f "$xrbn" ] && [ ! -f "$xrtp" ] && [ ! -f "$xrhtml" ] && [ ! -f "$xrtxt" ] && [ ! -f "$xrem" ] && [ ! -f "$xrpng" ]
+if [ ! -f "$xrsh" ] && [ ! -f "$xrpy" ] && [ ! -f "$xrbn" ] && [ ! -f "$xrtp" ] && [ ! -f "$xrhtml" ] && [ ! -f "$xrtxt" ] && [ ! -f "$xrem" ] && [ ! -f "$xrpng" ]
 then
 echo "[!] Some (files) are missing..."
 echo "[!] Please re-clone XRMailer..."
@@ -90,7 +90,6 @@ sleep 1
 mkdir emails >/dev/null 2>&1
 mkdir files >/dev/null 2>&1
 mkdir templates >/dev/null 2>&1
-mkdir modules >/dev/null 2>&1
 mkdir .xrlog >/dev/null 2>&1
 touch xrlog >/dev/null 2>&1
 echo "Setup Done" > xrlog
@@ -100,7 +99,6 @@ mv sample.html templates/ >/dev/null 2>&1
 mv sample.txt templates/ >/dev/null 2>&1
 mv sample.csv emails/ >/dev/null 2>&1
 mv sample.png files/ >/dev/null 2>&1
-mv xrsmtp.py modules/ >/dev/null 2>&1
 mv xrlog .xrlog/ >/dev/null 2>&1
 proceed=true
 fi
