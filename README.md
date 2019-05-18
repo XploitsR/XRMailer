@@ -21,13 +21,13 @@
     2. chmod +x setup.sh && ./setup.sh
 
 ## Gmail Users:
-   1. Go to this link: https://myaccount.google.com/security
+   1. Go to this link: [Google Security](https://myaccount.google.com/security)
    2. Login to your account if u haven't already
    3. Scroll down and click on *Turn on access* for Less secure apps access
    4. On Less secure app access page, Turn ON *Allow less secure apps*
 
 ## Yahoo Users:
-   1. Go to this link: https://login.yahoo.com/account/security
+   1. Go to this link: [Yahoo Security](https://login.yahoo.com/account/security)
    2. Login to your account if u haven't already
    3. Scroll down and *Turn ON* Allow apps that use less secure sign in
 
