@@ -19,15 +19,21 @@
 # Instagram: @_xploitsr_author_1                                     #
 # Email: solomonnarh97062@gmail.com                                  #
 ######################################################################
-
-import sys,csv
-import smtplib, ssl
-import getpass
-import time
-from email import encoders
-from email.mime.base import MIMEBase
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+try:
+ import sys,csv,os
+ import smtplib, ssl
+ import getpass
+ import time
+ from email import encoders
+ from email.mime.base import MIMEBase
+ from email.mime.text import MIMEText
+ from email.mime.multipart import MIMEMultipart
+except (ModuleNotFoundError,ImportError) as e:
+ print(e)
+ print("Wait....updating and upgrading your system")
+ time.sleep(2)
+ os.system("clear && apt-get update && apt-get upgrade")
+ quit()
 
 Temp = False
 userMassBool = None
@@ -220,8 +226,13 @@ print(
 )
 
 try:
-   from modules.xrsmtp import XRSmtp
-   xr = XRSmtp()
+   try:
+    from xrsmtp import XRSmtp
+    xr = XRSmtp()
+   except (ModuleNotFoundError,ImportError) as e:
+    print(e)
+    print("Type: pip install xrsmtp to install the missing module.")
+    quit()
    print(" 1: Gmail\n 2: Yahoo")
    userProv = int(input("[#] Choose: "))
    #Verify Email Service Providers
