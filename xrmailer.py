@@ -32,7 +32,7 @@ except (ModuleNotFoundError,ImportError) as e:
  print(e)
  print("Wait....updating and upgrading your system")
  time.sleep(2)
- os.system("clear && apt-get update && apt-get upgrade")
+ os.system("apt-get update && apt-get upgrade -y")
  quit()
 
 Temp = False
@@ -58,52 +58,52 @@ def Templates():
 def print_customText():
     print(
 """
-#############################
-# ::CUSTOM TEXT::           #
-# Put your Custom Text      #
-# Into The Templates Folder #
-# And Specify The Name Here #
-# Save It As .txt           #
-# Example: sample.txt       #
-#############################
+[===========================]
+[ ::CUSTOM TEXT::           ]
+[ Put your Custom Text      ]
+[ Into The Templates Folder ]
+[ And Specify The Name Here ]
+[ Save It As .txt           ]
+[ Example: sample.txt       ]
+[===========================]
  """
          )
 
 def print_customTextHtml():
     n = """
-################################
-# ::CUSTOM TEXT::              #
-# Put your Custom Text         #
-# Into The Templates Folder    #
-# And Specify The Name Here    #
-# Save It As .txt              #
-# Example: sample.txt          #
-# It can include any <body>    #
-# Elements::example <b><a><i>  #
-# <img><p><span> and many more #
-################################
+[==============================]
+[ ::CUSTOM TEXT::              ]
+[ Put your Custom Text         ]
+[ Into The Templates Folder    ]
+[ And Specify The Name Here    ]
+[ Save It As .txt              ]
+[ Example: sample.txt          ]
+[ It can include any <body>    ]
+[ Elements::example <b><a><i>  ]
+[ <img><p><span> and many more ]
+[==============================]
  """
     b = """
-#############################
-# ::CUSTOM HTML TEMPLATE::  #
-# Put your Custom Template  #
-# Into The Templates Folder #
-# And Specify The Name Here #
-# Example: sample.html      #
-#############################
+[===========================]
+[ ::CUSTOM HTML TEMPLATE::  ]
+[ Put your Custom Template  ]
+[ Into The Templates Folder ]
+[ And Specify The Name Here ]
+[ Example: sample.html      ]
+[===========================]
  """
     return [n,b]
 
 def print_docText():
     print(
 """
-###############################
-# ::Specify your attachment:: #
-# put your file               #
-# into the files folder       #
-# and specify the name here   #
-# example: sample.png         #
-###############################
+[=============================]
+[ ::Specify your attachment:: ]
+[ put your file               ]
+[ into the files folder       ]
+[ and specify the name here   ]
+[ example: sample.png         ]
+[=============================]
  """
    )
 
@@ -159,11 +159,11 @@ def accept_docfile(filetype,readType):
 def print_friendlyHdtext():
    print(
 """
-#############################
-# ::LETS EDIT THE FILE::    #
-#        HEADER             #
-#   Title,Content..etc      #
-#############################
+[===========================]
+[ ::LETS EDIT THE FILE::    ]
+[        HEADER             ]
+[   Title,Content..etc      ]
+[===========================]
 """
           )
 
@@ -178,12 +178,12 @@ def accept_friendlyFunc(t,s,m,f,tw,num):
      time.sleep(1)
      print(
 """
-#############################
-# ::LETS EDIT THE FILE::    #
-#        FOOTER             #
-#   How one gets in touch   #
-#        with you.          #
-#############################
+[===========================]
+[ ::LETS EDIT THE FILE::    ]
+[        FOOTER             ]
+[   How one gets in touch   ]
+[        with you.          ]
+[===========================]
 """
           )
      cFb = str(input(f"{f}"))
@@ -219,9 +219,9 @@ def accept_friendlyFunc(t,s,m,f,tw,num):
 #this extends smtp_*()
 print(
 """
-###########################
-# EMAIL SERVICE PROVIDERS #
-###########################
+[=========================]
+[ EMAIL SERVICE PROVIDERS ]
+[=========================]
 """
 )
 
@@ -256,9 +256,9 @@ time.sleep(1)
 #Email type
 print(
 """
-#################
-# TYPE OF EMAIL #
-#################
+[==============================]
+[         TYPE OF EMAIL        ]
+[==============================]
 """
 )
 
@@ -310,9 +310,9 @@ try:
  if Temp:
     print(
 """
-###################
-# CHOOSE TEMPLATE #
-###################
+[==============================]
+[       CHOOSE TEMPLATE        ]
+[==============================]
 """
    )
     print(" 1: Friendly\n 2: Business\n 3: Custom ")
@@ -347,9 +347,9 @@ time.sleep(1)
 try:
   print(
 """
-#######################
-# TO MULTIPLE USERS ? #
-#######################
+[==============================]
+[     TO MULTIPLE USERS ?      ]
+[==============================]
  """
   )
   print(" 1: Yes\n 2: No")
@@ -360,29 +360,29 @@ try:
   if userMass == 1:
      print(
 """
-#############################
-# Put A File In Emails      #
-# Folder Containing Your    #
-# Emails...                 #
-# First Line Of The File    #
-# Should Be *number,email*  #
-# Without the asterisks (*) #
-# For Each Column, Specify  #
-# The Number...             #
-# File Should Be Saved With #
-# An Extension as .csv in   #
-# Emails Folder...          #
-#                           #
-# ::You can Check a sample::# 
-# ::File in Emails Folder:: #
-#                           #
-# ::Example:: sample.csv    #
-#                           #
-# number,email              #
-# 1,abc@mailServer.com      #
-# 2,efg@mailServer.co       #
-# 3,xyz@mailServer.net      #
-#############################
+[===========================]
+[ Put A File In Emails      ]
+[ Folder Containing Your    ]
+[ Emails...                 ]
+[ First Line Of The File    ]
+[ Should Be *number,email*  ]
+[ Without the asterisks (*) ]
+[ For Each Column, Specify  ]
+[ The Number...             ]
+[ File Should Be Saved With ]
+[ An Extension as .csv in   ]
+[ Emails Folder...          ]
+[                           ]
+[ ::You can Check a sample::]
+[ ::File in Emails Folder:: ]
+[                           ]
+[ ::Example:: sample.csv    ]
+[                           ]
+[ number,email              ]
+[ 1,abc@mailServer.com      ]
+[ 2,efg@mailServer.co       ]
+[ 3,xyz@mailServer.net      ]
+[===========================]
  """
          )
 
@@ -412,9 +412,9 @@ time.sleep(1)
 
 print(
 """
-#############
-# SEND MAIL #
-#############
+[==============================]
+[         SEND MAIL            ]
+[==============================]
  """
 )
 
