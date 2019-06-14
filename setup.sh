@@ -104,9 +104,17 @@ proceed=true
 fi
 if [ "$proceed" ]
 then
+cd /bin
+if [ ! -f "/bin/xrmailer" ];then 
+touch xrmailer >/dev/null 2>&1
+echo '#!/bin/bash 
+cd '$path' && ./xrmailer $1' > xrmailer
+chmod +x xrmailer
+fi
+
 sleep 1
 echo "[*] Setup Done (^_^) ";
-echo "[*] Type ./xrmailer to get started (^_^) "
+echo "[*] Type: xrmailer --start to get started (^_^) "
 echo " "
 sleep 1
 exit 1
@@ -116,7 +124,7 @@ fi
 else
 echo " "
 echo "[*] Setup Already Done"
-echo "[*] Type ./xrmailer to get started (^_^) "
+echo "[*] Type xrmailer --start to get started (^_^) "
 echo " "
 exit 1
 fi

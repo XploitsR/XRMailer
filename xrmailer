@@ -24,7 +24,7 @@ clear
 path=`pwd`
 xrlog="$path/.xrlog/xrlog"
 
-if [ -f "$xrlog" ]
+if [ -f "$xrlog" ] || [ ! -f "$xrlog" ]
 then
 
 cyan='\e[0;36m'
@@ -42,36 +42,65 @@ Banner(){
 source banner
 
 }
+Credits(){
+echo "
+        [== XploitsR Authors ==]
+[============================================]
+          == Full Programmer ==
+              Solomon Narh
+
+            == His Email ==
+       solomonnarh97062@gmail.com
+
+        == His Facebook Account ==
+
+   https://facebook.com/solomon.narh.311
+
+           [== Contributors ==]
+[============================================]
+           == HTML Developer ==
+             Dharmesh Pandey
+
+            == His Email ==
+       dharmeshpandey001@gmail.com
+
+        == His Facebook Account ==
+   https://facebook.com/dharmeshspandey
+[============================================]
+"
+}
 
 Usage(){
 
-echo " "
+echo "Usage: xrmailer [OPTION] "
 echo "OPTIONS:"
 echo " "
-echo "       -h :: Print this screen"
-echo "       -v :: Print XRMailer Version"
+echo "       --start :: for starting up xrmailer"
+echo "       --setup :: for setting up xrmailer for the first time"
+echo "       --help  :: print this screen"
+echo "       --version :: print xrmailer version"
+echo "       --credits :: show developers && contributors"
 echo " "
-echo "Usage:"
-echo " "
-echo "     ./xrmailer"
+echo "Start:"
+echo "     xrmailer --start"
 echo " "
 
 }
 
 Version(){
 
-echo " ::XRMailer::Version:: 1.5"
+echo "XRMailer::Version->1.0.3"
 
 }
 
-if [ "$1" = "-h" ]
+if [ "$1" = '--help' ]
 then
 sleep 2
 
    Banner
    Usage
 
-elif [ "$1" = '-v' ]
+elif [ "$1" = '--version' ]
 then
 sleep 2
 
@@ -79,7 +108,13 @@ sleep 2
 echo " "
    Version
 
-elif [[ -z "$1" ]]
+elif [ "$1" = '--setup' ];then
+chmod +x setup.sh && ./setup.sh
+
+elif [ "$1" = '--credits' ];then
+Credits
+
+elif [ "$1" = '--start' ] && [ -f "$xrlog" ]
 then
 echo " "
 sleep 3
@@ -98,13 +133,11 @@ python3 $file
 sleep 3
 
 else
-
 echo -e $red"[!] ::Mailer(file) not found:: "
 sleep 2
 echo -e $red"[!] ::Aborting:: "
 sleep 3
 fi
-
 else
 sleep 2
 
@@ -114,6 +147,6 @@ echo " "
 fi
 else
 echo "[!] Please Run The Setup"
-echo "[*] Type chmod 755 setup.sh && ./setup.sh"
+echo "[*] Type: xrmailer --setup"
 exit 1
 fi
