@@ -32,7 +32,10 @@
    3. Scroll down and *Turn ON* Allow apps that use less secure sign in
 
 ## Run:
-    ./xrmailer
+    xrmailer --start
+    
+## Help
+    xrmailer --help
    
 ## To Update:
     1. chmod +x update
